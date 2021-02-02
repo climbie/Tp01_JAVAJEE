@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,16 +29,36 @@ public class ExperimentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        InetAddress IP = InetAddress.getLocalHost();
+        String ndramanIP = IP.getHostAddress();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
+           out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet ExperimentServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ExperimentServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Ma Premiere Servlet</h1>");
+            out.print("<h2>Information concernant l'adresse IP et le navigateur utilisé par le client :</h2>");
+            out.print("<p> Adresse IP du client : "+ndramanIP +"</p>");
+            out.print("<p> Navigateur du client :"+request.getLocalAddr()+" </p>");
+            
+            out.print("<h2>Information concernant la requête du client :</h2>");
+            out.print("<p> Methode : "+request.getMethod()+"</p>");
+            out.print("<p> Protocole : "+request.getProtocol()+"</p>");
+            out.print("<p> URI démandé : "+request.getRequestURI()+"</p>");
+            
+            out.print("<h1> Information concernant l'entête de la requête : </h1>");
+            out.print("<P>Host:  "+request.getServerName()+" : "+request.getServerPort()+"</p>");
+            out.print("<p> User-agent:"+request.getCharacterEncoding()+"</p>");
+            out.print("<p> Accept: </p>");
+            out.print("<p> Accept-language: "+request.getLocale()+"</p>");
+            out.print("<p> Accept-encoding: </p>");
+            out.print("<p> Accept-charset: </p>");
+            out.print("<p> kip-alive: </p>");
+            out.print("<p>connexion: </p>");
             out.println("</body>");
             out.println("</html>");
         }
